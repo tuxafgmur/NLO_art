@@ -5816,10 +5816,10 @@ bool ClassLinker::LinkVirtualMethods(
           }
           vtable->SetElementPtrSize(j, virtual_method, image_pointer_size_);
           virtual_method->SetMethodIndex(j);
-        } else {
-          LOG(WARNING) << "Before Android 4.1, method " << PrettyMethod(virtual_method)
-                       << " would have incorrectly overridden the package-private method in "
-                       << PrettyDescriptor(super_method->GetDeclaringClassDescriptor());
+//         } else {
+//           LOG(WARNING) << "Before Android 4.1, method " << PrettyMethod(virtual_method)
+//                        << " would have incorrectly overridden the package-private method in "
+//                        << PrettyDescriptor(super_method->GetDeclaringClassDescriptor());
         }
       } else if (super_method->IsOverridableByDefaultMethod()) {
         // We didn't directly override this method but we might through default methods...

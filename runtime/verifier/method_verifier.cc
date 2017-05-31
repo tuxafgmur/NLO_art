@@ -446,11 +446,11 @@ MethodVerifier::FailureData MethodVerifier::VerifyMethod(Thread* self,
   }
   if (kTimeVerifyMethod) {
     uint64_t duration_ns = NanoTime() - start_ns;
-    if (duration_ns > MsToNs(100)) {
-      LOG(WARNING) << "Verification of " << PrettyMethod(method_idx, *dex_file)
-                   << " took " << PrettyDuration(duration_ns)
-                   << (IsLargeMethod(code_item) ? " (large method)" : "");
-    }
+//     if (duration_ns > MsToNs(100)) {
+//       LOG(WARNING) << "Verification of " << PrettyMethod(method_idx, *dex_file)
+//                    << " took " << PrettyDuration(duration_ns)
+//                    << (IsLargeMethod(code_item) ? " (large method)" : "");
+//     }
   }
   result.types = verifier.encountered_failure_types_;
   return result;

@@ -414,13 +414,13 @@ void Monitor::Lock(Thread* self) {
                 uint32_t pc;
                 ArtMethod* m = self->GetCurrentMethod(&pc);
                 // TODO: We should maybe check that original_owner is still a live thread.
-                LOG(WARNING) << "Long "
-                    << PrettyContentionInfo(original_owner_name,
-                                            original_owner_tid,
-                                            owners_method,
-                                            owners_dex_pc,
-                                            num_waiters)
-                    << " in " << PrettyMethod(m) << " for " << PrettyDuration(MsToNs(wait_ms));
+//                 LOG(WARNING) << "Long "
+//                     << PrettyContentionInfo(original_owner_name,
+//                                             original_owner_tid,
+//                                             owners_method,
+//                                             owners_dex_pc,
+//                                             num_waiters)
+//                     << " in " << PrettyMethod(m) << " for " << PrettyDuration(MsToNs(wait_ms));
               }
               const char* owners_filename;
               int32_t owners_line_number;

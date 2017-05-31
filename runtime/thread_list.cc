@@ -501,9 +501,9 @@ void ThreadList::SuspendAll(const char* cause, bool long_suspend) {
     const uint64_t end_time = NanoTime();
     const uint64_t suspend_time = end_time - start_time;
     suspend_all_historam_.AdjustAndAddValue(suspend_time);
-    if (suspend_time > kLongThreadSuspendThreshold) {
-      LOG(WARNING) << "Suspending all threads took: " << PrettyDuration(suspend_time);
-    }
+    //if (suspend_time > kLongThreadSuspendThreshold) {
+    //  LOG(WARNING) << "Suspending all threads took: " << PrettyDuration(suspend_time);
+    //}
 
     if (kDebugLocking) {
       // Debug check that all threads are suspended.
@@ -512,11 +512,11 @@ void ThreadList::SuspendAll(const char* cause, bool long_suspend) {
   }
   ATRACE_BEGIN((std::string("Mutator threads suspended for ") + cause).c_str());
 
-  if (self != nullptr) {
-    VLOG(threads) << *self << " SuspendAll complete";
-  } else {
-    VLOG(threads) << "Thread[null] SuspendAll complete";
-  }
+//   if (self != nullptr) {
+//     VLOG(threads) << *self << " SuspendAll complete";
+//   } else {
+//     VLOG(threads) << "Thread[null] SuspendAll complete";
+//   }
 }
 
 // Ensures all threads running Java suspend and that those not running Java don't start.

@@ -2761,15 +2761,15 @@ void Heap::LogGC(GcCause gc_cause, collector::GarbageCollector* collector) {
       pause_string << PrettyDuration((pause_times[i] / 1000) * 1000)
                    << ((i != pause_times.size() - 1) ? "," : "");
     }
-    LOG(INFO) << gc_cause << " " << collector->GetName()
-              << " GC freed "  << current_gc_iteration_.GetFreedObjects() << "("
-              << PrettySize(current_gc_iteration_.GetFreedBytes()) << ") AllocSpace objects, "
-              << current_gc_iteration_.GetFreedLargeObjects() << "("
-              << PrettySize(current_gc_iteration_.GetFreedLargeObjectBytes()) << ") LOS objects, "
-              << percent_free << "% free, " << PrettySize(current_heap_size) << "/"
-              << PrettySize(total_memory) << ", " << "paused " << pause_string.str()
-              << " total " << PrettyDuration((duration / 1000) * 1000);
-    VLOG(heap) << Dumpable<TimingLogger>(*current_gc_iteration_.GetTimings());
+//     LOG(INFO) << gc_cause << " " << collector->GetName()
+//               << " GC freed "  << current_gc_iteration_.GetFreedObjects() << "("
+//               << PrettySize(current_gc_iteration_.GetFreedBytes()) << ") AllocSpace objects, "
+//               << current_gc_iteration_.GetFreedLargeObjects() << "("
+//               << PrettySize(current_gc_iteration_.GetFreedLargeObjectBytes()) << ") LOS objects, "
+//               << percent_free << "% free, " << PrettySize(current_heap_size) << "/"
+//               << PrettySize(total_memory) << ", " << "paused " << pause_string.str()
+//               << " total " << PrettyDuration((duration / 1000) * 1000);
+//     VLOG(heap) << Dumpable<TimingLogger>(*current_gc_iteration_.GetTimings());
   }
 }
 
@@ -3464,7 +3464,7 @@ collector::GcType Heap::WaitForGcToCompleteLocked(GcCause cause, Thread* self) {
       // task daemon thread, the currently running collection is
       // considered as a blocking GC.
       running_collection_is_blocking_ = true;
-      VLOG(gc) << "Waiting for a blocking GC " << cause;
+      //VLOG(gc) << "Waiting for a blocking GC " << cause;
     }
     ScopedTrace trace("GC: Wait For Completion");
     // We must wait, change thread state then sleep on gc_complete_cond_;
@@ -3473,16 +3473,16 @@ collector::GcType Heap::WaitForGcToCompleteLocked(GcCause cause, Thread* self) {
   }
   uint64_t wait_time = NanoTime() - wait_start;
   total_wait_time_ += wait_time;
-  if (wait_time > long_pause_log_threshold_) {
-    LOG(INFO) << "WaitForGcToComplete blocked for " << PrettyDuration(wait_time)
-        << " for cause " << cause;
-  }
+//   if (wait_time > long_pause_log_threshold_) {
+//     LOG(INFO) << "WaitForGcToComplete blocked for " << PrettyDuration(wait_time)
+//         << " for cause " << cause;
+//   }
   if (self != task_processor_->GetRunningThread()) {
     // The current thread is about to run a collection. If the thread
     // is not the heap task daemon thread, it's considered as a
     // blocking GC (i.e., blocking itself).
     running_collection_is_blocking_ = true;
-    VLOG(gc) << "Starting a blocking GC " << cause;
+    //VLOG(gc) << "Starting a blocking GC " << cause;
   }
   return last_gc_type;
 }
@@ -3499,8 +3499,8 @@ size_t Heap::GetPercentFree() {
 
 void Heap::SetIdealFootprint(size_t max_allowed_footprint) {
   if (max_allowed_footprint > GetMaxMemory()) {
-    VLOG(gc) << "Clamp target GC heap from " << PrettySize(max_allowed_footprint) << " to "
-             << PrettySize(GetMaxMemory());
+    //VLOG(gc) << "Clamp target GC heap from " << PrettySize(max_allowed_footprint) << " to "
+    //         << PrettySize(GetMaxMemory());
     max_allowed_footprint = GetMaxMemory();
   }
   max_allowed_footprint_ = max_allowed_footprint;
